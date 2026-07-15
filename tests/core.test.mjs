@@ -341,7 +341,7 @@ test("review window uses the refreshed focused-review workspace", () => {
 test("README presents the refreshed product workflow screenshots", () => {
   const readme = fs.readFileSync(new URL("../README.md", import.meta.url), "utf8");
   assert.match(readme, /release-v1\.1\.3/);
-  assert.match(readme, /统票票-安装版-1\.1\.3-x64\.exe/);
+  assert.match(readme, /TongPiaoPiao-v1\.1\.3-Windows-x64-Setup\.exe/);
   for (const image of [
     "recognition-workspace.png",
     "summary-workspace.png",

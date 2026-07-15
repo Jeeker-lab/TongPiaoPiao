@@ -27,7 +27,7 @@
 
 前往 [Releases](../../releases/latest) 下载最新版 Windows 安装程序：
 
-`统票票-安装版-1.1.3-x64.exe`
+`TongPiaoPiao-v1.1.3-Windows-x64-Setup.exe`
 
 支持 Windows 10 / 11 x64。安装包未使用商业代码签名证书，Windows 首次运行时可能显示“未知发布者”；请核对文件来源与 Release 中的 SHA-256 后再继续安装。
 
