@@ -7,7 +7,7 @@
 <p align="center"><strong>完全断网运行的智能选票识别与统计系统</strong></p>
 
 <p align="center">
-  <img alt="Release" src="https://img.shields.io/badge/release-v1.1.2-238636" />
+  <img alt="Release" src="https://img.shields.io/badge/release-v1.1.3-238636" />
   <img alt="Windows" src="https://img.shields.io/badge/Windows-10%20%2F%2011-0078D4" />
   <img alt="Offline" src="https://img.shields.io/badge/OCR-完全离线-0B8F6A" />
   <img alt="PDF limit" src="https://img.shields.io/badge/PDF-最大%20100MB-E88A1A" />
@@ -20,14 +20,14 @@
 全部识别与统计均在本机完成，不上传选票、不调用云端 OCR，也不需要联网。
 
 <p align="center">
-  <img src="docs/images/main-window.png" alt="统票票主界面" />
+  <img src="docs/images/recognition-workspace.png" alt="统票票识别工作台" />
 </p>
 
 ## 下载与安装
 
 前往 [Releases](../../releases/latest) 下载最新版 Windows 安装程序：
 
-`TongPiaoPiao-v1.1.2-Windows-x64-Setup.exe`
+`统票票-安装版-1.1.3-x64.exe`
 
 支持 Windows 10 / 11 x64。安装包未使用商业代码签名证书，Windows 首次运行时可能显示“未知发布者”；请核对文件来源与 Release 中的 SHA-256 后再继续安装。
 
@@ -52,6 +52,32 @@
 2. 软件自动分析选票题头、人员名单、评价档次和页面布局。
 3. 等待逐页扫描与累计；必要时打开“建议复核”窗口进行人工确认。
 4. 点击“导出 Excel 汇总表”，保存最终统计结果。
+
+## 界面预览
+
+<p align="center">
+  <img src="docs/images/recognition-workspace.png" alt="识别过程与实时进度" />
+</p>
+
+<p align="center"><strong>识别工作台：进度、结构识别和累计结果集中呈现</strong></p>
+
+<p align="center">
+  <img src="docs/images/summary-workspace.png" alt="识别结果与汇总矩阵" />
+</p>
+
+<p align="center"><strong>汇总结果：按人员和评价档次实时累计</strong></p>
+
+<p align="center">
+  <img src="docs/images/export-workspace.png" alt="导出 Excel 汇总表" />
+</p>
+
+<p align="center"><strong>手动导出：确认后再生成 Excel 汇总表</strong></p>
+
+<p align="center">
+  <img src="docs/images/review-workspace.png" alt="人工建议复核窗口" />
+</p>
+
+<p align="center"><strong>人工复核：定位原票、修改等次并立即同步统计</strong></p>
 
 ## 识别建议
 

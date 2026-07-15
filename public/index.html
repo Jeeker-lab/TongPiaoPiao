@@ -57,6 +57,7 @@
         </div>
       </section>
       <section class="workspace hidden" id="workspace">
+        <div class="task-workspace" id="taskWorkspace">
         <div class="stepper">
           <div class="step active" data-step="1">
             <b>1</b><span>识别选票结构<small id="s1">等待开始</small></span>
@@ -70,7 +71,7 @@
             <b>3</b><span>生成汇总表格<small id="s3">尚未开始</small></span>
           </div>
         </div>
-        <div class="progress">
+        <div class="progress progress-strip" id="progressStrip">
           <div>
             <span class="pdf-icon">PDF</span>
             <div>
@@ -128,16 +129,17 @@
             <article>
               <span>已扫描</span><b id="pages">0</b><small>页</small>
             </article>
-            <article>
+            <article id="metricPeople">
               <span>识别人员</span><b id="peopleMetric">0</b><small>人</small>
             </article>
-            <article>
+            <article id="metricOptions">
               <span>评价档次</span><b id="categoryMetric">0</b><small>项</small>
             </article>
-            <article>
+            <article id="metricMarks">
               <span>累计勾选</span><b id="marks">0</b><small>次</small>
             </article>
           </div>
+          <div class="result-workspace" id="resultWorkspace">
           <div class="matrix-wrap">
             <table id="matrix">
               <thead>
@@ -154,6 +156,7 @@
               </tbody>
             </table>
           </div>
+          </div>
         </section>
         <section class="review-card">
           <div class="section-head">
@@ -168,6 +171,7 @@
           </div>
           <div class="review-summary"><b id="reviewHint">识别过程中会自动汇集低置信度和空白项目</b><span>人工确认后，第二栏累计结果和最终 Excel 将立即采用修正后的等次。</span></div>
         </section>
+        </div>
       </section>
     </main>
     <dialog id="templateDialog">

@@ -208,6 +208,12 @@ function renderTemplate() {
   $("#categories").innerHTML = template.categories
     .map((c, i) => `<span><i>${i + 1}</i>${esc(c)}</span>`)
     .join("");
+  renderWorkspaceMetrics();
+}
+function renderWorkspaceMetrics(s) {
+  $("#metricPeople").dataset.value = String(template?.people?.length || 0);
+  $("#metricOptions").dataset.value = String(template?.categories?.length || 0);
+  $("#metricMarks").dataset.value = String(s?.marks || 0);
 }
 function renderMatrix(s) {
   if (!template) return;
@@ -232,6 +238,7 @@ function renderMatrix(s) {
     $("#pages").textContent = s.pages;
     $("#marks").textContent = s.marks;
   }
+  renderWorkspaceMetrics(s);
 }
 function renderReviewCount(s) {
   const pending = s?.review?.length || 0;

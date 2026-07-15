@@ -290,3 +290,64 @@ test("names are merged from the first ten full pages without secondary OCR", () 
   assert.match(ocr, /mergePeopleBySerial\(templates\)/);
   assert.doesNotMatch(ocr, /recoverNameWords|incompleteNameBlocks|name-\$\{block\}\.png/);
 });
+
+test("main UI exposes progress and result workspaces without changing action ids", () => {
+  for (const id of [
+    "upload",
+    "choose",
+    "xlsx",
+    "pageImage",
+    "openReview",
+    "taskWorkspace",
+    "progressStrip",
+    "metricPeople",
+    "metricOptions",
+    "metricMarks",
+    "resultWorkspace",
+  ]) {
+    assert.match(html, new RegExp(`id="${id}"`));
+  }
+});
+
+test("main UI stylesheet defines the refreshed task and result workspace", () => {
+  const css = fs.readFileSync(new URL("../public/style.css", import.meta.url), "utf8");
+  for (const selector of [
+    ".task-workspace",
+    ".progress-strip",
+    ".metric-grid",
+    ".result-workspace",
+    ".result-matrix",
+  ]) {
+    assert.ok(css.includes(selector), `missing ${selector}`);
+  }
+});
+
+test("main UI updates refreshed workspace metric state from recognition results", () => {
+  const app = fs.readFileSync(new URL("../public/app.js", import.meta.url), "utf8");
+  for (const id of ["#metricPeople", "#metricOptions", "#metricMarks"]) {
+    assert.ok(app.includes(id), `missing metric binding ${id}`);
+  }
+  assert.match(app, /function renderWorkspaceMetrics/);
+});
+
+test("review window uses the refreshed focused-review workspace", () => {
+  const reviewHtml = fs.readFileSync(new URL("../public/review.html", import.meta.url), "utf8");
+  const reviewCss = fs.readFileSync(new URL("../public/review.css", import.meta.url), "utf8");
+  assert.match(reviewHtml, /class="review-shell"/);
+  assert.ok(reviewCss.includes(".review-shell"));
+  assert.ok(reviewCss.includes(".review-sidebar"));
+});
+
+test("README presents the refreshed product workflow screenshots", () => {
+  const readme = fs.readFileSync(new URL("../README.md", import.meta.url), "utf8");
+  assert.match(readme, /release-v1\.1\.3/);
+  assert.match(readme, /统票票-安装版-1\.1\.3-x64\.exe/);
+  for (const image of [
+    "recognition-workspace.png",
+    "summary-workspace.png",
+    "export-workspace.png",
+    "review-workspace.png",
+  ]) {
+    assert.ok(readme.includes(image), `README missing ${image}`);
+  }
+});
