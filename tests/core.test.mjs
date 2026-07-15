@@ -337,3 +337,15 @@ test("review window uses the refreshed focused-review workspace", () => {
   assert.ok(reviewCss.includes(".review-shell"));
   assert.ok(reviewCss.includes(".review-sidebar"));
 });
+
+test("README presents the refreshed product workflow screenshots", () => {
+  const readme = fs.readFileSync(new URL("../README.md", import.meta.url), "utf8");
+  for (const image of [
+    "recognition-workspace.png",
+    "summary-workspace.png",
+    "export-workspace.png",
+    "review-workspace.png",
+  ]) {
+    assert.ok(readme.includes(image), `README missing ${image}`);
+  }
+});

@@ -20,7 +20,7 @@
 全部识别与统计均在本机完成，不上传选票、不调用云端 OCR，也不需要联网。
 
 <p align="center">
-  <img src="docs/images/main-window.png" alt="统票票主界面" />
+  <img src="docs/images/recognition-workspace.png" alt="统票票识别工作台" />
 </p>
 
 ## 下载与安装
@@ -52,6 +52,32 @@
 2. 软件自动分析选票题头、人员名单、评价档次和页面布局。
 3. 等待逐页扫描与累计；必要时打开“建议复核”窗口进行人工确认。
 4. 点击“导出 Excel 汇总表”，保存最终统计结果。
+
+## 界面预览
+
+<p align="center">
+  <img src="docs/images/recognition-workspace.png" alt="识别过程与实时进度" />
+</p>
+
+<p align="center"><strong>识别工作台：进度、结构识别和累计结果集中呈现</strong></p>
+
+<p align="center">
+  <img src="docs/images/summary-workspace.png" alt="识别结果与汇总矩阵" />
+</p>
+
+<p align="center"><strong>汇总结果：按人员和评价档次实时累计</strong></p>
+
+<p align="center">
+  <img src="docs/images/export-workspace.png" alt="导出 Excel 汇总表" />
+</p>
+
+<p align="center"><strong>手动导出：确认后再生成 Excel 汇总表</strong></p>
+
+<p align="center">
+  <img src="docs/images/review-workspace.png" alt="人工建议复核窗口" />
+</p>
+
+<p align="center"><strong>人工复核：定位原票、修改等次并立即同步统计</strong></p>
 
 ## 识别建议
 
