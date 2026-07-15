@@ -7,7 +7,7 @@
 <p align="center"><strong>完全断网运行的智能选票识别与统计系统</strong></p>
 
 <p align="center">
-  <img alt="Release" src="https://img.shields.io/badge/release-v1.1.2-238636" />
+  <img alt="Release" src="https://img.shields.io/badge/release-v1.1.3-238636" />
   <img alt="Windows" src="https://img.shields.io/badge/Windows-10%20%2F%2011-0078D4" />
   <img alt="Offline" src="https://img.shields.io/badge/OCR-完全离线-0B8F6A" />
   <img alt="PDF limit" src="https://img.shields.io/badge/PDF-最大%20100MB-E88A1A" />
@@ -27,7 +27,7 @@
 
 前往 [Releases](../../releases/latest) 下载最新版 Windows 安装程序：
 
-`TongPiaoPiao-v1.1.2-Windows-x64-Setup.exe`
+`统票票-安装版-1.1.3-x64.exe`
 
 支持 Windows 10 / 11 x64。安装包未使用商业代码签名证书，Windows 首次运行时可能显示“未知发布者”；请核对文件来源与 Release 中的 SHA-256 后再继续安装。
 
