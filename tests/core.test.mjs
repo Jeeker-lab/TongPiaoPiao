@@ -290,3 +290,21 @@ test("names are merged from the first ten full pages without secondary OCR", () 
   assert.match(ocr, /mergePeopleBySerial\(templates\)/);
   assert.doesNotMatch(ocr, /recoverNameWords|incompleteNameBlocks|name-\$\{block\}\.png/);
 });
+
+test("main UI exposes progress and result workspaces without changing action ids", () => {
+  for (const id of [
+    "upload",
+    "choose",
+    "xlsx",
+    "pageImage",
+    "openReview",
+    "taskWorkspace",
+    "progressStrip",
+    "metricPeople",
+    "metricOptions",
+    "metricMarks",
+    "resultWorkspace",
+  ]) {
+    assert.match(html, new RegExp(`id="${id}"`));
+  }
+});
