@@ -308,3 +308,16 @@ test("main UI exposes progress and result workspaces without changing action ids
     assert.match(html, new RegExp(`id="${id}"`));
   }
 });
+
+test("main UI stylesheet defines the refreshed task and result workspace", () => {
+  const css = fs.readFileSync(new URL("../public/style.css", import.meta.url), "utf8");
+  for (const selector of [
+    ".task-workspace",
+    ".progress-strip",
+    ".metric-grid",
+    ".result-workspace",
+    ".result-matrix",
+  ]) {
+    assert.ok(css.includes(selector), `missing ${selector}`);
+  }
+});
