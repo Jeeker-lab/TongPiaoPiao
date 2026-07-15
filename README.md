@@ -27,7 +27,7 @@
 
 前往 [Releases](../../releases/latest) 下载最新版 Windows 安装程序：
 
-`统票票·智能选票统计系统-安装程序.exe`
+`TongPiaoPiao-v1.1.2-Windows-x64-Setup.exe`
 
 支持 Windows 10 / 11 x64。安装包未使用商业代码签名证书，Windows 首次运行时可能显示“未知发布者”；请核对文件来源与 Release 中的 SHA-256 后再继续安装。
 
@@ -102,4 +102,3 @@ docs/images/             仓库展示图片
 当前仓库未附开源许可证。除 GitHub 平台展示与下载所必需的权利外，其他权利均予保留；如需二次分发、商业使用或基于源码制作衍生版本，请先取得版权所有者明确授权。
 
 <p align="center">Copyright © 2026 统票票. All rights reserved.</p>
-
