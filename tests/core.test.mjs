@@ -321,3 +321,11 @@ test("main UI stylesheet defines the refreshed task and result workspace", () =>
     assert.ok(css.includes(selector), `missing ${selector}`);
   }
 });
+
+test("main UI updates refreshed workspace metric state from recognition results", () => {
+  const app = fs.readFileSync(new URL("../public/app.js", import.meta.url), "utf8");
+  for (const id of ["#metricPeople", "#metricOptions", "#metricMarks"]) {
+    assert.ok(app.includes(id), `missing metric binding ${id}`);
+  }
+  assert.match(app, /function renderWorkspaceMetrics/);
+});
