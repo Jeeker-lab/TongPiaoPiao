@@ -1,0 +1,52 @@
+{
+  "name": "ballotvision-desktop",
+  "version": "1.1.2",
+  "private": true,
+  "description": "统票票·智能选票统计系统",
+  "main": "electron-main.cjs",
+  "author": "统票票",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win --x64"
+  },
+  "dependencies": {
+    "pngjs": "7.0.0"
+  },
+  "devDependencies": {
+    "electron": "37.2.6",
+    "electron-builder": "26.0.12"
+  },
+  "build": {
+    "appId": "cn.ballotvision.desktop",
+    "productName": "统票票",
+    "directories": { "output": "release" },
+    "files": [
+      "electron-main.cjs",
+      "preload.cjs",
+      "build/icon.ico",
+      "app/**/*",
+      "node_modules/pngjs/**/*"
+    ],
+    "extraResources": [
+      { "from": "resources/poppler", "to": "poppler" }
+    ],
+    "electronDist": "./node_modules/electron/dist",
+    "win": {
+      "signAndEditExecutable": true,
+      "icon": "build/icon.ico",
+      "target": [
+        { "target": "nsis", "arch": ["x64"] }
+      ],
+      "artifactName": "统票票-安装版-${version}-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "shortcutName": "统票票",
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "installerHeaderIcon": "build/icon.ico"
+    }
+  }
+}

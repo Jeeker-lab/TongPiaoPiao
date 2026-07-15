@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>建议复核 · 统票票</title>
+    <link rel="stylesheet" href="/review.css" />
+  </head>
+  <body>
+    <header>
+      <div><span class="logo">票</span><div><b>建议复核</b><small id="subtitle">正在读取识别结果</small></div></div>
+      <button id="closeWindow">关闭窗口</button>
+    </header>
+    <main>
+      <aside>
+        <div class="stats"><b id="pendingCount">0</b><span>待复核</span><b id="reviewedCount">0</b><span>已确认</span></div>
+        <div class="filters">
+          <button class="active" data-filter="pending">待复核</button>
+          <button data-filter="blank">空白</button>
+          <button data-filter="reviewed">已确认</button>
+          <button data-filter="all">全部</button>
+        </div>
+        <div class="blank-batch" id="blankBatch">
+          <div><b>空白项 <span id="blankCount">0</span> 人</b><small>仅处理尚未人工确认的空白项</small></div>
+          <select id="blankCategory" aria-label="批量设置等次"></select>
+          <button id="confirmBlanks">一键确认全部空白</button>
+        </div>
+        <div class="pages" id="pageList"><div class="empty">暂无复核页面</div></div>
+      </aside>
+      <section class="work">
+        <div class="toolbar">
+          <button id="previous">← 上一张</button>
+          <strong id="pageTitle">等待选择人员</strong>
+          <button id="showFullPage">查看整页</button>
+          <button id="next">下一张 →</button>
+        </div>
+        <div class="ballot">
+          <img id="ballotImage" alt="待复核选票" />
+          <canvas id="personCrop" aria-label="当前人员所在行的小截图"></canvas>
+          <div id="imageEmpty">选择左侧页面或下方人员后查看选票</div>
+        </div>
+        <div class="review-items" id="reviewItems"><div class="empty">暂无待复核人员</div></div>
+      </section>
+    </main>
+    <div class="toast" id="toast"></div>
+    <script type="module" src="/review.js"></script>
+  </body>
+</html>

@@ -1,0 +1,51 @@
+# Dependencies
+node_modules/
+desktop/node_modules/
+
+# Build outputs and installers
+release/
+desktop/release/
+dist/
+dist-electron/
+*.exe
+*.blockmap
+builder-debug.yml
+
+# Electron/PDF runtime binaries are distributed through GitHub Releases
+desktop/resources/poppler/Library/
+
+# User ballots, exports and OCR working files
+tmp/
+*.pdf
+*.xlsx
+*.xls
+*.csv
+
+# Logs, process markers and local caches
+*.log
+*.pid
+coverage/
+.cache/
+.codex/
+__pycache__/
+*.py[cod]
+
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.pfx
+*.key
+
+# Internal implementation notes
+docs/superpowers/
+
+# Design previews not used by the application
+desktop/build/icon-48px-preview.png
+
+# OS/editor metadata
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

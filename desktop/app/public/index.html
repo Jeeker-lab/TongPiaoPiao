@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>统票票 · 智能选票统计系统</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header>
+      <a class="brand"
+        ><span class="logo">票</span
+        ><span>统票票<small>智能选票统计系统</small></span></a
+      >
+      <div class="service"><i></i> 识别服务正常</div>
+    </header>
+    <main>
+      <section class="hero">
+        <div>
+          <span class="eyebrow">BALLOT INTELLIGENCE</span>
+          <h1>从一张选票，<br />到一份<span>清晰的统计结果</span></h1>
+          <p>
+            自动识别人员名单与评价档次，逐页扫描手写勾选，最终生成与原选票结构一致的
+            Excel 汇总表。
+          </p>
+        </div>
+        <div class="flow">
+          <div>
+            <b>01</b><span>识别模板<small>姓名与选项</small></span>
+          </div>
+          <i></i>
+          <div>
+            <b>02</b><span>逐页统计<small>勾选自动累计</small></span>
+          </div>
+          <i></i>
+          <div>
+            <b>03</b><span>生成表格<small>Excel 汇总结果</small></span>
+          </div>
+        </div>
+      </section>
+      <section class="upload" id="upload">
+        <input id="file" type="file" accept="application/pdf" hidden />
+        <div class="upload-mark">PDF</div>
+        <div>
+          <h2>上传测评选票 PDF</h2>
+          <p>支持多页扫描件 · 最大支持 100MB · 全程离线统计</p>
+          <div class="template-choice">
+            <label>当前模板</label
+            ><select id="templateSelect">
+              <option value="">自动从 PDF 识别模板</option></select
+            ><button class="link-btn" id="newTemplate">＋ 新建模板</button>
+          </div>
+        </div>
+        <div class="upload-actions">
+          <button class="primary" id="choose">选择 PDF</button>
+          <button id="xlsx" class="primary disabled" disabled>导出 Excel 汇总表</button>
+        </div>
+      </section>
+      <section class="workspace hidden" id="workspace">
+        <div class="stepper">
+          <div class="step active" data-step="1">
+            <b>1</b><span>识别选票结构<small id="s1">等待开始</small></span>
+          </div>
+          <i></i>
+          <div class="step" data-step="2">
+            <b>2</b><span>逐页扫描统计<small id="s2">尚未开始</small></span>
+          </div>
+          <i></i>
+          <div class="step" data-step="3">
+            <b>3</b><span>生成汇总表格<small id="s3">尚未开始</small></span>
+          </div>
+        </div>
+        <div class="progress">
+          <div>
+            <span class="pdf-icon">PDF</span>
+            <div>
+              <b id="filename">选票.pdf</b
+              ><small id="progressText">准备处理</small>
+            </div>
+          </div>
+          <strong id="pct">0%</strong>
+          <div class="bar"><i id="bar"></i></div>
+        </div>
+        <section class="template-card">
+          <div class="section-head">
+            <div>
+              <span class="number">01</span>
+              <div>
+                <h2>选票结构识别</h2>
+                <p>综合前 10 页识别固定的人员名单和评价档次</p>
+              </div>
+            </div>
+            <span class="state" id="templateState">识别中</span>
+          </div>
+          <div class="template-body">
+            <div class="template-preview">
+              <img id="pageImage" /><span id="previewEmpty">等待页面渲染</span>
+            </div>
+            <div class="template-info">
+              <div class="info-row">
+                <span>选票标题</span><b id="title">—</b>
+              </div>
+              <div class="info-row">
+                <span>人员名单</span><b><em id="peopleCount">0</em> 人</b>
+              </div>
+              <div class="name-box" id="names">
+                <span>识别完成后显示名单</span>
+              </div>
+              <div class="info-row option-head">
+                <span>评价档次</span><b><em id="categoryCount">0</em> 项</b>
+              </div>
+              <div class="chips" id="categories"></div>
+            </div>
+          </div>
+        </section>
+        <section class="scan-card">
+          <div class="section-head">
+            <div>
+              <span class="number">02</span>
+              <div>
+                <h2>逐页扫描与累计</h2>
+                <p>每识别一页，人员对应档次的票数立即增加</p>
+              </div>
+            </div>
+            <span class="page-pill" id="pagePill">0 / 0 页</span>
+          </div>
+          <div class="metrics">
+            <article>
+              <span>已扫描</span><b id="pages">0</b><small>页</small>
+            </article>
+            <article>
+              <span>识别人员</span><b id="peopleMetric">0</b><small>人</small>
+            </article>
+            <article>
+              <span>评价档次</span><b id="categoryMetric">0</b><small>项</small>
+            </article>
+            <article>
+              <span>累计勾选</span><b id="marks">0</b><small>次</small>
+            </article>
+          </div>
+          <div class="matrix-wrap">
+            <table id="matrix">
+              <thead>
+                <tr>
+                  <th>序号</th>
+                  <th>姓名</th>
+                  <th>等待识别档次</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colspan="3" class="empty">统计开始后实时更新</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <section class="review-card">
+          <div class="section-head">
+            <div>
+              <span class="number">03</span>
+              <div>
+                <h2>建议复核人员</h2>
+                <p>在独立窗口查看选票，并人工确认软件存疑的等次。</p>
+              </div>
+            </div>
+            <div class="review-actions"><span class="review-count" id="reviewCount">0 人</span><button class="primary" id="openReview" disabled>打开复核窗口</button></div>
+          </div>
+          <div class="review-summary"><b id="reviewHint">识别过程中会自动汇集低置信度和空白项目</b><span>人工确认后，第二栏累计结果和最终 Excel 将立即采用修正后的等次。</span></div>
+        </section>
+      </section>
+    </main>
+    <dialog id="templateDialog">
+      <form method="dialog">
+        <button class="dialog-close" value="cancel">×</button>
+        <h2>新建离线选票模板</h2>
+        <p>适用于规则表格：序号列、姓名列后依次排列评价选项。</p>
+        <label
+          >模板名称<input
+            id="tplName"
+            placeholder="例如：季度民主测评表" /></label
+        ><label
+          >表格标题<input
+            id="tplTitle"
+            placeholder="输出到 Excel 顶部" /></label
+        ><label
+          >评价选项（用逗号分隔）<input
+            id="tplCategories"
+            value="优秀,合格,基本合格,不合格" /></label
+        ><label
+          >人员姓名（每行一个，可在姓名前写序号）<textarea
+            id="tplPeople"
+            rows="12"
+            placeholder="1 马晓&#10;2 王珊&#10;3 王磊"
+          ></textarea></label
+        ><label
+          >页面分栏<select id="tplBlocks">
+            <option value="1">单栏表格</option>
+            <option value="2" selected>左右双栏表格</option>
+          </select></label
+        >
+        <div class="dialog-actions">
+          <button value="cancel" class="secondary">取消</button
+          ><button type="button" id="saveTemplate" class="primary">
+            保存并使用
+          </button>
+        </div>
+      </form>
+    </dialog>
+    <footer>完全离线处理 · 原始文件不会离开本机 · 完成复核后手动导出结果</footer>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
