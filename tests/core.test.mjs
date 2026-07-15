@@ -329,3 +329,11 @@ test("main UI updates refreshed workspace metric state from recognition results"
   }
   assert.match(app, /function renderWorkspaceMetrics/);
 });
+
+test("review window uses the refreshed focused-review workspace", () => {
+  const reviewHtml = fs.readFileSync(new URL("../public/review.html", import.meta.url), "utf8");
+  const reviewCss = fs.readFileSync(new URL("../public/review.css", import.meta.url), "utf8");
+  assert.match(reviewHtml, /class="review-shell"/);
+  assert.ok(reviewCss.includes(".review-shell"));
+  assert.ok(reviewCss.includes(".review-sidebar"));
+});

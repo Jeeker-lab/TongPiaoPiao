@@ -3,3 +3,18 @@
 .review-items{max-height:none;overflow:auto;flex:1 1 50%;align-content:start}
 .review-person.active{border:3px solid #087a58;background:#dff4ea;box-shadow:0 0 0 3px #69b79b66,0 7px 18px #075c412e;position:relative;transform:translateY(-1px)}
 .review-person.active::before{content:"";position:absolute;left:-3px;top:-3px;bottom:-3px;width:8px;background:#087a58;border-radius:8px 0 0 8px}
+
+/* 焕新的复核工作台：让选票定位、待确认人员和批量操作有清晰层级。 */
+.review-shell{background:#f2f6f3;gap:14px;padding:14px;grid-template-columns:236px minmax(0,1fr)}
+.review-sidebar{background:#fff;border:1px dashed #b7cbc3;border-radius:16px;padding:12px;box-shadow:0 12px 28px #173d2d0b}
+.review-shell .work{background:#fff;border:1px dashed #b7cbc3;border-radius:16px;padding:12px;box-shadow:0 12px 28px #173d2d0b}
+.review-shell .toolbar{height:42px;flex-basis:42px;justify-content:space-between;padding:0 4px}
+.review-shell .toolbar strong{color:#173d2d;font-size:13px;font-weight:800}
+.review-shell .ballot{background:#f0f4f1;border-style:dashed;border-color:#b7cbc3;border-radius:13px;padding:12px}
+.review-shell .review-items{margin-top:10px;gap:9px;padding:4px;scrollbar-color:#9cc5b3 transparent}
+.review-shell .review-person{border-radius:11px;padding:9px 10px;background:#fffdf7}
+.review-shell .review-person:hover{transform:translateY(-1px);box-shadow:0 6px 15px #87601422}
+.review-shell .review-person.active{box-shadow:0 0 0 3px #69b79b66,0 10px 22px #075c4130}
+.review-sidebar .stats{border:1px solid #d6ece1;background:#edf8f3;border-radius:11px;padding:11px}
+.review-sidebar .blank-batch{border-radius:11px;box-shadow:0 5px 14px #a8700d0d}
+@media(max-width:850px){.review-shell{padding:8px;gap:8px;grid-template-columns:210px minmax(0,1fr)}}
