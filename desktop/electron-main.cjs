@@ -1,4 +1,4 @@
-const { app, BrowserWindow, dialog, Menu } = require('electron');
+const { app, BrowserWindow, dialog, Menu, ipcMain, shell } = require('electron');
 const path = require('node:path');
 const fs = require('node:fs');
 const net = require('node:net');
@@ -7,7 +7,24 @@ const { pathToFileURL } = require('node:url');
 let mainWindow = null;
 let isQuitting = false;
 
-app.setName('统票票');
+function historyFile(filename) {
+  const safe = path.basename(String(filename || ''));
+  return safe && safe.toLowerCase().endsWith('.xlsx') ? path.join(app.getPath('desktop'), safe) : null;
+}
+ipcMain.handle('history:open', async (_event, filename) => {
+  const file = historyFile(filename);
+  if (!file || !fs.existsSync(file)) return { ok: false, error: '未找到该历史汇总表' };
+  const error = await shell.openPath(file);
+  return { ok: !error, error };
+});
+ipcMain.handle('history:reveal', (_event, filename) => {
+  const file = historyFile(filename);
+  if (!file || !fs.existsSync(file)) return { ok: false, error: '未找到该历史汇总表' };
+  shell.showItemInFolder(file);
+  return { ok: true };
+});
+
+app.setName('智能选票统计系统');
 
 function waitForServer(port, timeoutMs = 20000) {
   const started = Date.now();
@@ -44,7 +61,7 @@ async function createWindow() {
   await import(pathToFileURL(path.join(appRoot, 'server.mjs')).href);
   await waitForServer(4173);
   mainWindow = new BrowserWindow({
-    title: '统票票·智能选票统计系统',
+    title: '智能选票统计系统',
     icon: path.join(__dirname, 'build', 'icon.ico'),
     width: 1280,
     height: 850,
@@ -61,6 +78,19 @@ async function createWindow() {
     }
   });
   mainWindow.once('ready-to-show', () => mainWindow.show());
+  mainWindow.on('close', (event) => {
+    if (isQuitting) return;
+    const result = dialog.showMessageBoxSync(mainWindow, {
+      type: 'question',
+      buttons: ['取消', '确认关闭'],
+      defaultId: 0,
+      cancelId: 0,
+      title: '确认关闭',
+      message: '确定要关闭智能选票统计系统吗？',
+      detail: '正在处理的选票任务将停止；已导出的汇总表可在历史记录中找到。',
+    });
+    if (result !== 1) event.preventDefault();
+  });
   mainWindow.on('closed', () => { mainWindow = null; });
   await mainWindow.loadURL('http://127.0.0.1:4173');
 }

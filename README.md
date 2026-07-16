@@ -7,7 +7,7 @@
 <p align="center"><strong>完全断网运行的智能选票识别与统计系统</strong></p>
 
 <p align="center">
-  <img alt="Release" src="https://img.shields.io/badge/release-v1.1.3-238636" />
+  <img alt="Release" src="https://img.shields.io/badge/release-v1.1.16-238636" />
   <img alt="Windows" src="https://img.shields.io/badge/Windows-10%20%2F%2011-0078D4" />
   <img alt="Offline" src="https://img.shields.io/badge/OCR-完全离线-0B8F6A" />
   <img alt="PDF limit" src="https://img.shields.io/badge/PDF-最大%20100MB-E88A1A" />
@@ -27,7 +27,7 @@
 
 前往 [Releases](../../releases/latest) 下载最新版 Windows 安装程序：
 
-`TongPiaoPiao-v1.1.3-Windows-x64-Setup.exe`
+`统票票-安装版-1.1.16-x64.exe`
 
 支持 Windows 10 / 11 x64。安装包未使用商业代码签名证书，Windows 首次运行时可能显示“未知发布者”；请核对文件来源与 Release 中的 SHA-256 后再继续安装。
 
@@ -45,6 +45,25 @@
 | 原版式 Excel | 汇总表参考原选票的单栏、双栏及表格结构生成，不强制套用固定模板 |
 | 大文件支持 | 单个 PDF 最大支持 100MB，采用分批渲染策略处理多页扫描件 |
 | 完全离线 | OCR、复核、统计与导出均在本机执行，不上传原始文件 |
+
+## v1.1.16 界面更新
+
+- 处理进度使用 PDF 文件卡、实时页码与百分比展示。
+- 统计完成后直接在原进度区域显示 Excel 汇总表导出卡。
+- 新增历史记录入口、手动导出提示与人工复核入口。
+- 第二栏使用统一的扫描、人员、评价档次与勾选统计图标。
+
+<p align="center">
+  <img src="docs/images/recognition-workspace.png" alt="最新识别与统计界面" />
+</p>
+
+<p align="center">
+  <img src="docs/images/export-workspace.png" alt="最新 Excel 导出界面" />
+</p>
+
+<p align="center">
+  <img src="docs/images/review-workspace.png" alt="最新人工复核界面" />
+</p>
 
 ## 使用流程
 

@@ -3,214 +3,107 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>统票票 · 智能选票统计系统</title>
+    <title>智能选票统计系统</title>
     <link rel="stylesheet" href="/style.css" />
+    <style>
+      /* v1.1.7: 使用与界面风格一致的文件图标。 */
+      .pdf-icon { width:76px;height:76px;padding:0;display:grid;place-items:center;background:#eef6f2!important;border-radius:18px!important;box-shadow:none!important;color:transparent!important;overflow:visible!important; }
+      .pdf-icon:before { content:"PDF";position:relative!important;inset:auto!important;width:40px!important;height:49px!important;padding-top:24px!important;text-align:center!important;background:linear-gradient(145deg,#0c9d73,#087254)!important;color:#fff!important;border-radius:4px!important;font:800 13px/18px Arial!important;box-shadow:0 3px 7px #087a5830!important;z-index:1!important; }
+      .pdf-icon:after { content:"";position:absolute!important;left:47px!important;top:13px!important;border-left:11px solid transparent!important;border-bottom:11px solid #d7f3e7!important;z-index:2!important; }
+      .completion .excel-icon { position:relative;flex:0 0 112px!important;width:112px!important;height:106px!important;border:0!important;background:transparent!important;color:transparent!important;overflow:visible; }
+      .completion .excel-icon:before { content:"";position:absolute;left:28px;top:1px;width:64px;height:94px;border:2px solid #d4e1dc;border-radius:9px;background:#fff; }
+      .completion .excel-icon:after { content:"X";position:absolute;left:0;top:42px;width:57px;height:57px;border-radius:7px;background:linear-gradient(145deg,#0b9c6c,#08734f);color:#fff;font:800 34px/57px Arial;text-align:center;box-shadow:0 4px 8px #087a5830; }
+      @media(max-width:850px){.completion .excel-icon{flex-basis:74px!important;width:74px!important;height:76px!important}.completion .excel-icon:before{left:17px;width:48px;height:70px}.completion .excel-icon:after{top:31px;width:42px;height:42px;font-size:25px;line-height:42px}.pdf-icon{width:62px;height:62px}.pdf-icon:before{transform:scale(.8)}.pdf-icon:after{left:40px;top:8px}}
+    </style>
+    <style>
+      /* 已审核的高级图标组：统一使用同一套质感、色彩与光影。 */
+      .pdf-icon,.metric-icon,.completion .excel-icon{background-image:url('/assets/premium-icon-sprite.png')!important;background-repeat:no-repeat!important;background-size:300% 200%!important;border:0!important;box-shadow:none!important;color:transparent!important}
+      .pdf-icon{background-position:0 0!important;border-radius:16px!important}.pdf-icon:before,.pdf-icon:after{display:none!important}
+      .completion .excel-icon{background-position:50% 0!important;border-radius:14px!important}.completion .excel-icon:before,.completion .excel-icon:after{display:none!important}
+      .metric-icon{background-color:transparent!important;border-radius:12px!important}.page-icon{background-position:100% 0!important}.people-icon{background-position:0 100%!important}.category-icon{background-position:50% 100%!important}.mark-icon{background-position:100% 100%!important}
+    </style>
+    <style>
+      /* 放大并裁掉图标组的外框，使图标直接融入数据卡片。 */
+      .completion .excel-icon{background-size:450% 300%!important;background-position:50% 12.5%!important;border-radius:0!important;box-shadow:none!important}
+      .metrics article{min-height:112px;justify-content:center;gap:15px;text-align:center;box-shadow:none!important}
+      .metrics article>div{display:flex;align-items:baseline;justify-content:center;flex-wrap:wrap;max-width:132px}.metrics article span{flex-basis:100%;text-align:center}.metrics article b{font-size:30px}
+      .metric-icon{width:58px!important;height:58px!important;flex-basis:58px!important;background-size:450% 300%!important;background-color:transparent!important;border-radius:0!important;box-shadow:none!important}
+      .page-icon{background-position:92.86% 12.5%!important}.people-icon{background-position:7.14% 87.5%!important}.category-icon{background-position:50% 87.5%!important}.mark-icon{background-position:92.86% 87.5%!important}
+      @media(max-width:850px){.metrics article{min-height:94px}.metric-icon{width:48px!important;height:48px!important;flex-basis:48px!important}.metrics article b{font-size:25px}}
+    </style>
+    <style>
+      /* 最终统计图标：左侧图标、中央数字组，避免视觉偏移。 */
+      .completion .excel-icon{background:none!important;width:104px!important;height:104px!important;flex-basis:104px!important;position:relative;overflow:visible!important}
+      .completion .excel-icon:before{content:""!important;display:block!important;position:absolute!important;left:29px!important;top:2px!important;width:61px!important;height:91px!important;border:2px solid #d5dfda!important;border-radius:8px!important;background:#fff!important;box-shadow:none!important}
+      .completion .excel-icon:after{content:"X"!important;display:block!important;position:absolute!important;left:0!important;top:42px!important;width:55px!important;height:55px!important;border:0!important;border-radius:7px!important;background:linear-gradient(145deg,#0c956a,#087253)!important;color:#fff!important;font:800 33px/55px Arial!important;text-align:center!important;box-shadow:none!important}
+      .metrics article{display:grid!important;grid-template-columns:64px minmax(0,1fr) 64px!important;align-items:center!important;justify-content:normal!important;gap:0!important;padding:13px 16px!important;text-align:left!important}.metrics article:after{content:""}.metrics article>div{display:block!important;max-width:none!important;text-align:left!important}.metrics article span{display:block!important;text-align:left!important;margin:0 0 2px!important}.metrics article b{font-size:30px!important}.metric-icon{display:grid!important;place-items:center!important;width:58px!important;height:58px!important;flex-basis:auto!important;background:#edf8f3!important;border-radius:17px!important;background-image:none!important;color:#07825e!important}.metric-icon svg{display:block;width:39px;height:39px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.mark-icon svg{width:43px;height:43px}.metric-icon:before,.metric-icon:after{display:none!important}
+      @media(max-width:850px){.metrics article{grid-template-columns:52px minmax(0,1fr) 52px!important;padding:11px}.metric-icon{width:48px!important;height:48px!important;border-radius:14px!important}.metric-icon svg{width:33px;height:33px}.completion .excel-icon{transform:scale(.78);transform-origin:left center;margin-right:-20px}}
+    </style>
+    <style>
+      /* 恢复原 Excel 文件图标，仅收掉外围浅绿色光晕。 */
+      .completion .excel-icon{background-image:url('/assets/premium-icon-sprite.png')!important;background-repeat:no-repeat!important;background-size:300% 200%!important;background-position:50% 0!important;width:112px!important;height:112px!important;flex-basis:112px!important;border:0!important;border-radius:0!important;clip-path:inset(5px round 17px)!important}
+      .completion .excel-icon:before,.completion .excel-icon:after{display:none!important}
+    </style>
+    <style>
+      /* 已审核图标：扫描放大镜与评价剪贴板。 */
+      .page-icon,.category-icon{background-repeat:no-repeat!important;background-position:center!important;background-size:126%!important}
+      .page-icon{background-image:url('/assets/scan-magnifier-icon.png')!important}.category-icon{background-image:url('/assets/category-clipboard-icon.png')!important}
+      .page-icon svg,.category-icon svg{display:none!important}
+    </style>
+    <style>
+      /* 矢量线条保证高清显示；评价档次底色与相邻图标统一。 */
+      .page-icon,.category-icon{background-image:none!important;background:#edf8f3!important}.page-icon svg,.category-icon svg{display:block!important}.category-icon{box-shadow:inset 0 1px 0 #f8fffb!important}
+    </style>
+    <style>
+      /* 恢复已审核的厚线剪贴板图标；仅融合外围浅绿色底色。 */
+      .category-icon{background-image:url('/assets/category-clipboard-icon.png')!important;background-repeat:no-repeat!important;background-position:center!important;background-size:126%!important;background-color:#edf8f3!important;background-blend-mode:multiply!important;box-shadow:none!important}
+      .category-icon svg{display:none!important}
+    </style>
+    <style>
+      /* 从原图中提取出的剪贴板线条，使用统一浅绿底座与较小比例。 */
+      .category-icon{background:#edf8f3 url('/assets/category-clipboard-line.png') center/110% no-repeat!important;background-blend-mode:normal!important;box-shadow:none!important}
+    </style>
   </head>
   <body>
     <header>
-      <a class="brand"
-        ><span class="logo">票</span
-        ><span>统票票<small>智能选票统计系统</small></span></a
-      >
-      <div class="service"><i></i> 识别服务正常</div>
+      <a class="brand"><span class="logo">票</span><span>统票票<small>智能选票统计系统</small></span></a>
+      <button class="history-button" id="historyButton" type="button">历史记录</button>
+      <div class="service"><i></i>识别服务正常</div>
     </header>
     <main>
-      <section class="hero">
-        <div>
-          <span class="eyebrow">BALLOT INTELLIGENCE</span>
-          <h1>从一张选票，<br />到一份<span>清晰的统计结果</span></h1>
-          <p>
-            自动识别人员名单与评价档次，逐页扫描手写勾选，最终生成与原选票结构一致的
-            Excel 汇总表。
-          </p>
-        </div>
-        <div class="flow">
-          <div>
-            <b>01</b><span>识别模板<small>姓名与选项</small></span>
-          </div>
-          <i></i>
-          <div>
-            <b>02</b><span>逐页统计<small>勾选自动累计</small></span>
-          </div>
-          <i></i>
-          <div>
-            <b>03</b><span>生成表格<small>Excel 汇总结果</small></span>
-          </div>
-        </div>
+      <section class="hero" id="hero">
+        <div><span class="eyebrow">BALLOT INTELLIGENCE</span><h1>从一张选票，<br>到一份<span>清晰的统计结果</span></h1><p>自动识别人员名单与评价档次，逐页扫描手写勾选，最终生成与原选票结构一致的 Excel 汇总表。</p></div>
+        <div class="flow"><div><b>01</b><span>识别模板<small>姓名与选项</small></span></div><i></i><div><b>02</b><span>逐页统计<small>勾选自动累计</small></span></div><i></i><div><b>03</b><span>人工复核<small>确认最终结果</small></span></div></div>
       </section>
       <section class="upload" id="upload">
         <input id="file" type="file" accept="application/pdf" hidden />
         <div class="upload-mark">PDF</div>
-        <div>
-          <h2>上传测评选票 PDF</h2>
-          <p>支持多页扫描件 · 最大支持 100MB · 全程离线统计</p>
-          <div class="template-choice">
-            <label>当前模板</label
-            ><select id="templateSelect">
-              <option value="">自动从 PDF 识别模板</option></select
-            ><button class="link-btn" id="newTemplate">＋ 新建模板</button>
-          </div>
-        </div>
-        <div class="upload-actions">
-          <button class="primary" id="choose">选择 PDF</button>
-          <button id="xlsx" class="primary disabled" disabled>导出 Excel 汇总表</button>
-        </div>
+        <div class="upload-copy"><h2>上传测评选票 PDF</h2><p>支持多页扫描件 · 最大支持 100MB · 全程离线统计</p></div>
+        <div class="upload-actions"><button class="primary" id="choose">选择 PDF</button><button id="xlsx" class="primary disabled" disabled>导出 Excel 汇总表</button></div>
       </section>
       <section class="workspace hidden" id="workspace">
-        <div class="task-workspace" id="taskWorkspace">
-        <div class="stepper">
-          <div class="step active" data-step="1">
-            <b>1</b><span>识别选票结构<small id="s1">等待开始</small></span>
-          </div>
-          <i></i>
-          <div class="step" data-step="2">
-            <b>2</b><span>逐页扫描统计<small id="s2">尚未开始</small></span>
-          </div>
-          <i></i>
-          <div class="step" data-step="3">
-            <b>3</b><span>生成汇总表格<small id="s3">尚未开始</small></span>
-          </div>
+        <div class="progress">
+          <div class="progress-file"><span class="pdf-icon">PDF</span><div><b id="filename">选票.pdf</b><small id="fileMeta">文件大小：— · 共—页</small></div></div>
+          <div class="progress-scan"><b>正在扫描第 <em id="scanCurrent">0</em> / <em id="scanTotal">0</em> 页</b><div class="bar"><i id="bar"></i></div></div>
+          <strong id="pct">0%</strong><span class="sr-only" id="progressText">准备处理</span>
         </div>
-        <div class="progress progress-strip" id="progressStrip">
-          <div>
-            <span class="pdf-icon">PDF</span>
-            <div>
-              <b id="filename">选票.pdf</b
-              ><small id="progressText">准备处理</small>
-            </div>
-          </div>
-          <strong id="pct">0%</strong>
-          <div class="bar"><i id="bar"></i></div>
-        </div>
+        <section class="completion hidden" id="completion">
+          <i class="excel-icon">X</i><div><b id="exportFilename">选票统计结果汇总表.xlsx</b><small>已准备完成，点击即可导出</small><div><button class="primary export-primary" id="completionExport">一键导出 Excel 汇总表</button><button class="completion-review" id="completionReview">人工复核后再导出</button></div></div>
+        </section>
         <section class="template-card">
-          <div class="section-head">
-            <div>
-              <span class="number">01</span>
-              <div>
-                <h2>选票结构识别</h2>
-                <p>综合前 10 页识别固定的人员名单和评价档次</p>
-              </div>
-            </div>
-            <span class="state" id="templateState">识别中</span>
-          </div>
-          <div class="template-body">
-            <div class="template-preview">
-              <img id="pageImage" /><span id="previewEmpty">等待页面渲染</span>
-            </div>
-            <div class="template-info">
-              <div class="info-row">
-                <span>选票标题</span><b id="title">—</b>
-              </div>
-              <div class="info-row">
-                <span>人员名单</span><b><em id="peopleCount">0</em> 人</b>
-              </div>
-              <div class="name-box" id="names">
-                <span>识别完成后显示名单</span>
-              </div>
-              <div class="info-row option-head">
-                <span>评价档次</span><b><em id="categoryCount">0</em> 项</b>
-              </div>
-              <div class="chips" id="categories"></div>
-            </div>
-          </div>
+          <div class="section-head"><div><span class="number">01</span><div><h2>选票结构识别</h2><p>自动读取人员名单和评价档次</p></div></div><span class="state" id="templateState">识别中</span></div>
+          <div class="template-body"><div class="template-preview"><img id="pageImage"><span id="previewEmpty">等待页面渲染</span></div><div class="template-info"><div class="info-row"><span>选票标题</span><b id="title">—</b></div><div class="info-row"><span>人员名单</span><b><em id="peopleCount">0</em> 人</b></div><div class="name-box" id="names"><span>识别完成后显示名单</span></div><div class="info-row option-head"><span>评价档次</span><b><em id="categoryCount">0</em> 项</b></div><div class="chips" id="categories"></div></div></div>
         </section>
         <section class="scan-card">
-          <div class="section-head">
-            <div>
-              <span class="number">02</span>
-              <div>
-                <h2>逐页扫描与累计</h2>
-                <p>每识别一页，人员对应档次的票数立即增加</p>
-              </div>
-            </div>
-            <span class="page-pill" id="pagePill">0 / 0 页</span>
-          </div>
-          <div class="metrics">
-            <article>
-              <span>已扫描</span><b id="pages">0</b><small>页</small>
-            </article>
-            <article id="metricPeople">
-              <span>识别人员</span><b id="peopleMetric">0</b><small>人</small>
-            </article>
-            <article id="metricOptions">
-              <span>评价档次</span><b id="categoryMetric">0</b><small>项</small>
-            </article>
-            <article id="metricMarks">
-              <span>累计勾选</span><b id="marks">0</b><small>次</small>
-            </article>
-          </div>
-          <div class="result-workspace" id="resultWorkspace">
-          <div class="matrix-wrap">
-            <table id="matrix">
-              <thead>
-                <tr>
-                  <th>序号</th>
-                  <th>姓名</th>
-                  <th>等待识别档次</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td colspan="3" class="empty">统计开始后实时更新</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          </div>
+          <div class="section-head"><div><span class="number">02</span><div><h2>逐页扫描与累计</h2><p>每识别一页，人员对应档次的票数立即增加</p></div></div><span class="page-pill" id="pagePill">0 / 0 页</span></div>
+          <div class="metrics"><article><i class="metric-icon page-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="21" cy="21" r="11"/><path d="m29 29 9 9M16 17h10M16 21h10M16 25h8"/></svg></i><div><span>已扫描</span><b id="pages">0</b><small>页</small></div></article><article><i class="metric-icon people-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="16" r="7"/><path d="M11 39c1-8 6-13 13-13s12 5 13 13"/></svg></i><div><span>识别人员</span><b id="peopleMetric">0</b><small>人</small></div></article><article><i class="metric-icon category-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="13" y="11" width="22" height="28" rx="4"/><path d="M20 11V9c0-2 1.5-3 4-3s4 1 4 3v2M19 20h10M19 27h10M19 34h10"/></svg></i><div><span>评价档次</span><b id="categoryMetric">0</b><small>项</small></div></article><article><i class="metric-icon mark-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="15"/><path d="m17 24 5 5 10-11"/></svg></i><div><span>累计勾选</span><b id="marks">0</b><small>次</small></div></article></div>
+          <div class="matrix-wrap"><table id="matrix"><thead><tr><th>序号</th><th>姓名</th><th>等次识别档次</th></tr></thead><tbody><tr><td colspan="3" class="empty">统计开始后实时更新</td></tr></tbody></table></div>
         </section>
-        <section class="review-card">
-          <div class="section-head">
-            <div>
-              <span class="number">03</span>
-              <div>
-                <h2>建议复核人员</h2>
-                <p>在独立窗口查看选票，并人工确认软件存疑的等次。</p>
-              </div>
-            </div>
-            <div class="review-actions"><span class="review-count" id="reviewCount">0 人</span><button class="primary" id="openReview" disabled>打开复核窗口</button></div>
-          </div>
-          <div class="review-summary"><b id="reviewHint">识别过程中会自动汇集低置信度和空白项目</b><span>人工确认后，第二栏累计结果和最终 Excel 将立即采用修正后的等次。</span></div>
-        </section>
-        </div>
+        <section class="review-card"><div class="section-head"><div><span class="number">03</span><div><h2>建议复核人员</h2><p>在独立窗口查看选票，并人工确认软件存疑的等次。</p></div></div><div class="review-actions"><span class="review-count" id="reviewCount">0 人待复核</span><button class="primary" id="openReview" disabled>打开复核窗口</button></div></div><div class="review-summary"><b id="reviewHint">识别过程中会自动汇集低置信度和空白项目</b><span>人工确认后，第二栏累计结果和最终 Excel 将立即采用修正后的等次。</span></div></section>
       </section>
+      <aside class="history-panel hidden" id="historyPanel" aria-label="历史记录"><div class="history-head"><div><b>历史记录</b><small>最近导出的统计汇总表</small></div><button id="historyClose" type="button">×</button></div><div class="history-list" id="historyList"></div></aside>
     </main>
-    <dialog id="templateDialog">
-      <form method="dialog">
-        <button class="dialog-close" value="cancel">×</button>
-        <h2>新建离线选票模板</h2>
-        <p>适用于规则表格：序号列、姓名列后依次排列评价选项。</p>
-        <label
-          >模板名称<input
-            id="tplName"
-            placeholder="例如：季度民主测评表" /></label
-        ><label
-          >表格标题<input
-            id="tplTitle"
-            placeholder="输出到 Excel 顶部" /></label
-        ><label
-          >评价选项（用逗号分隔）<input
-            id="tplCategories"
-            value="优秀,合格,基本合格,不合格" /></label
-        ><label
-          >人员姓名（每行一个，可在姓名前写序号）<textarea
-            id="tplPeople"
-            rows="12"
-            placeholder="1 马晓&#10;2 王珊&#10;3 王磊"
-          ></textarea></label
-        ><label
-          >页面分栏<select id="tplBlocks">
-            <option value="1">单栏表格</option>
-            <option value="2" selected>左右双栏表格</option>
-          </select></label
-        >
-        <div class="dialog-actions">
-          <button value="cancel" class="secondary">取消</button
-          ><button type="button" id="saveTemplate" class="primary">
-            保存并使用
-          </button>
-        </div>
-      </form>
-    </dialog>
+    <div id="toast" class="toast" role="status"><span>✓</span><div><b id="toastTitle">已保存到桌面</b><small id="toastMessage"></small></div></div>
     <footer>完全离线处理 · 原始文件不会离开本机 · 完成复核后手动导出结果</footer>
     <script type="module" src="/app.js"></script>
   </body>
