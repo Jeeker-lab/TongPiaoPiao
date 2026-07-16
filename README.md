@@ -53,18 +53,6 @@
 - 处理进度实时显示页码与百分比展示。
 - 统计完成后直接在原进度区域显示 Excel 汇总表导出卡。
 
-<p align="center">
-  <img src="docs/images/recognition-workspace.png" alt="最新识别与统计界面" />
-</p>
-
-<p align="center">
-  <img src="docs/images/export-workspace.png" alt="最新 Excel 导出界面" />
-</p>
-
-<p align="center">
-  <img src="docs/images/review-workspace.png" alt="最新人工复核界面" />
-</p>
-
 ## 使用流程
 
 1. 点击“选择 PDF”，上传已经人工筛选过的扫描版选票。
